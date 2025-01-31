@@ -5,11 +5,17 @@
         <van-button type="default">默认按钮</van-button>
         <van-button type="danger">危险按钮</van-button>
         <van-button type="warning">警告按钮</van-button>
+        <p class="hello">你好</p>
     </div>
 
 </template>
 
 <script setup lang="ts">
 </script>
+
+
 <style scoped lang="less">
+.hello{
+    font-size: 30px;
+}
 </style>

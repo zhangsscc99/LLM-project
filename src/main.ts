@@ -4,6 +4,7 @@ import App from './App.vue'
 import { Button } from 'vant'
 import router from "./router/index"
 import 'vant/lib/index.css';
+import "amfe-flexible" //动态改变跟字体大小
 const app = createApp(App) 
 app.use(router) 
 app.use(Button)
