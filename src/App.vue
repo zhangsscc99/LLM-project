@@ -1,8 +1,5 @@
 <template>
-  <div>111</div>
-  <p>123</p>
-  <h1>456</h1>
-  
+  <RouterView></RouterView>
 </template>
 
 <script setup lang="ts">
