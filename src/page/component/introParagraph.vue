@@ -1,9 +1,11 @@
 <template>
     <div class="main-header">
-        <div class="main-header-left"></div>
-        <p class="name-field">Hi 我是你的旅游助手</p>
-        <p class="intro-section">你的专属旅游助手，可以帮你规划行程和解答出游问题哦</p>
-        <div>
+        <div class="main-header-left">
+            <p class="name-field">Hi 我是你的旅游助手</p>
+            <p class="intro-section">你的专属旅游助手，可以帮你规划行程和解答出游问题哦</p>
+        </div>
+        <div class="main-header-right">
+
             <img src="@/assets/intro-section.png" alt="">
         </div>
     </div>
