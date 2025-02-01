@@ -1,4 +1,7 @@
 <template>
+    <div class="content">
+        123
+    </div>
     <div>
         <van-button type="primary">主要按钮</van-button>
         <van-button type="success">成功按钮</van-button>
@@ -11,11 +14,12 @@
 </template>
 
 <script setup lang="ts">
+import introParagraph from '@/page/component/introParagraph.vue'
 </script>
 
 
 <style scoped lang="less">
-.hello{
-    font-size: 30px;
+.content{
+    padding: 0 15px;
 }
 </style>
