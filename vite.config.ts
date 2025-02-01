@@ -53,5 +53,9 @@ export default defineConfig({
       ],
     },
   },
-  
+  server:{
+    host: "10.198.119.149",
+    port: 5100,
+    
+  }
 });

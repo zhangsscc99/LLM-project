@@ -9,6 +9,7 @@
             <img src="@/assets/wenti.png" alt="">
             <p>你好</p>
         </div>
+        
     </div>
     <div class="change-section">
         <img src="@/assets/huanyihuan.png" alt="">
@@ -80,7 +81,7 @@
         font-size: 14px; 
         padding-left: 7px;
         color: #ffffff;
-        
+
     }
 }
 </style>
