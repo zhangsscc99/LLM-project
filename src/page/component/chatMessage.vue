@@ -13,16 +13,24 @@
         />
         </div>
         <div class="ai-message">
-            <div class="mark-text">大模型回复</div>
+            <!-- <div class="mark-text">大模型回复</div> -->
+             <!-- <div class="mark-text">
+                <loadIng></loadIng>
+             </div> -->
         </div>
+        <queryTrainTickets></queryTrainTickets>
     </div>
 </template>
 
 <script setup lang="ts">
-
+//loading加载
+import loadIng from '@/page/component/loadIng.vue'
+//火车票查询组件
+import queryTrainTickets from '@/page/toolComponents/queryTrainTickets.vue'
 </script>
 
-<style scoped lang="scss">
+
+<style scoped lang="less">
     .chat-message{
         display: flex;
         flex-direction: column;
