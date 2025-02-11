@@ -19,6 +19,7 @@
              </div> -->
         </div>
         <queryTrainTickets></queryTrainTickets>
+        <weather></weather>
     </div>
 </template>
 
@@ -27,6 +28,7 @@
 import loadIng from '@/page/component/loadIng.vue'
 //火车票查询组件
 import queryTrainTickets from '@/page/toolComponents/queryTrainTickets.vue'
+import weather from "@/page/toolComponents/weather.vue"
 </script>
 
 
