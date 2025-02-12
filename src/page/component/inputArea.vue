@@ -39,8 +39,6 @@ const fileList = ref([{url: 'https://fastly.jsdelivr.net/npm/@vant/assets/leaf.j
     bottom: 0;
     /deep/.van-uploader__wrapper--disabled{
         opacity: inherit;
-
-
     }
     .data-query{
         display: flex;
