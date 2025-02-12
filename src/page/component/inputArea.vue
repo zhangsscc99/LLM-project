@@ -24,6 +24,9 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue';
+const fileList = ref([{url: 'https://fastly.jsdelivr.net/npm/@vant/assets/leaf.jpeg'}]);
+
 
 </script>
 
@@ -60,6 +63,14 @@
             border-radius: 10px;
             padding: 6px;
             
+        }
+        .send-button{
+            border: none;
+            font-size: 15px;
+            color: #3a71e8;
+            font-weight: bold;
+            margin: 0 5px;
+
         }
     }
 }
