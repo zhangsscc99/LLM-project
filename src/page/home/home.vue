@@ -1,8 +1,9 @@
 <template>
     <div class="content">
         <introParagraph></introParagraph>
-        <defaultQuestion />
-        <chatMessage/>
+        <defaultQuestion></defaultQuestion>
+        <chatMessage></chatMessage>
+        <inputArea></inputArea>
     </div>
 </template>
 
@@ -11,6 +12,7 @@
 import introParagraph from '@/page/component/introParagraph.vue'
 import defaultQuestion from '@/page/component/defaultQuestion.vue'
 import chatMessage from '@/page/component/chatMessage.vue'
+import inputArea from '@/page/component/inputArea.vue'
 </script>
 
 
