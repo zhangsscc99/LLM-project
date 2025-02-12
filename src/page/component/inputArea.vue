@@ -1,6 +1,6 @@
 <template>
     <div class="input-container">
-        <van-uploader v-model="fileList" :max-count="1" preview-size="60" disabled />
+        <!-- <van-uploader v-model="fileList" :max-count="1" preview-size="60" disabled /> -->
         <div class="data-query">
             <van-button size="small" type="default">查询火车票</van-button>
             <van-button size="small" type="default">查询天气</van-button>
@@ -39,6 +39,10 @@ const fileList = ref([{url: 'https://fastly.jsdelivr.net/npm/@vant/assets/leaf.j
     bottom: 0;
     /deep/.van-uploader__wrapper--disabled{
         opacity: inherit;
+        margin-left: 15px;
+        .van-uploader_preview{
+            background-color: #ffffff;
+        }
     }
     .data-query{
         display: flex;
