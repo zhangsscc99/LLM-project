@@ -52,6 +52,13 @@
             width: 27px;
             height: 27px;
             margin: 0 10px;
+
+        }
+        .input-content{
+            background-color: #f8f9fd;
+            flex: 1;
+            border-radius: 10px;
+            padding: 6px;
             
         }
     }
