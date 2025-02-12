@@ -1,5 +1,6 @@
 <template>
     <div class="input-container">
+        <van-uploader v-model="fileList" :max-count="1" preview-size="60" disabled />
         <div class="data-query">
             <van-button size="small" type="default">查询火车票</van-button>
             <van-button size="small" type="default">查询天气</van-button>
@@ -14,7 +15,7 @@
         <div class="input-box-area">
             <img src="@/assets/qingchu.png" alt="">
             <van-field class="input-content" type="textarea" placeholder="请输入询问内容" :border="false"></van-field>
-            <van-button size="small" type="default">一键投诉</van-button>
+            <van-button class="send-button" size="small" type="default">发送</van-button>
 
         </div>
 
@@ -36,6 +37,11 @@ const fileList = ref([{url: 'https://fastly.jsdelivr.net/npm/@vant/assets/leaf.j
     left: 0;
     right: 0;
     bottom: 0;
+    /deep/.van-uploader__wrapper--disabled{
+        opacity: inherit;
+
+
+    }
     .data-query{
         display: flex;
         align-items: center;
