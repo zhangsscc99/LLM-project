@@ -26,6 +26,9 @@
     object-fit: cover;
 
 }
+
+
+
 .price-and-title{
     background-color: #ffffff;
     margin: 10px;
