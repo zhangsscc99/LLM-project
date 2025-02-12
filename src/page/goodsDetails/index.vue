@@ -5,6 +5,16 @@
         <p class="goods-price">199/人</p>
         <p class="goods-title">标题</p>
     </div>
+    <div class="goods-details">
+        <p class="goods-describe">产品特色</p>
+        <img src="https://www.aichi-now.jp/img/sp/top/mv_ph006.jpg" alt="">
+        <img src="https://www.aichi-now.jp/img/sp/top/mv_ph006.jpg" alt="">
+        <img src="https://www.aichi-now.jp/img/sp/top/mv_ph006.jpg" alt="">
+    </div>
+    <div class="submit">
+        <van-button type="primary" block>立即报名</van-button>
+    </div>
+    <div style="height: 100px"></div>
 </template>
 
 <script setup lang="ts">
@@ -30,5 +40,27 @@
         font-size: 19px;
     }
     
+}
+.goods-details{
+    background-color: #ffffff;
+    margin: 10px;
+    border-radius: 10px;
+    padding: 10px;
+    .goods-describe{
+        padding-bottom: 10px;
+        font-weight: bold;
+    }
+    img{
+        width: 100%;
+
+    }
+}
+.submit{
+    background-color: #ffffff;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px 20px 20px 20px;
 }
 </style>
