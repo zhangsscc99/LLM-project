@@ -24,4 +24,5 @@ export type chatMessageType = {
 
 
 
-}
+};
+export type conversationType = chatMessageType[]

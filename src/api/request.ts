@@ -1,4 +1,4 @@
-import { chatMessageType } from "@/types/index"
+import { chatMessageType, conversationType } from "@/types/index"
 const requestUrl = "http://127.0.0.1:7000"
 
 
@@ -15,7 +15,14 @@ const fetchApi = async(url:string, method:"POST" | "GET", body?:any, resType="se
     }else{
         bodyData = body
     }
-    await fetch(requestUrl)
+    const options:RequestInit = {
+        method,
+        headers, 
+        body:bodyData
+    }
+    const response = await fetch(requestUrl, options)
+    console.log(response)
+
 }
 
 // 统一返回的接口
@@ -27,7 +34,10 @@ interface ApiResponse<T>{
     code //状态码
 }
 // 发送消息
-export const chatMessageApi = (data:{chatMessage:chatMessageType}):Promise<ApiResponse<Buffer>>
+export const chatMessageApi = (data:{chatMessage:conversationType}):Promise<ApiResponse<Buffer>>=>
+    {
+    return fetchApi(`${requestUrl}/chatMessage`, "POST", data)
+    }
 
 
 

@@ -15,7 +15,7 @@
         <div class="input-box-area">
             <img src="@/assets/qingchu.png" alt="">
             <van-field class="input-content" type="textarea" placeholder="请输入询问内容" :border="false"></van-field>
-            <van-button class="send-button" size="small" type="default">发送</van-button>
+            <van-button class="send-button" size="small" type="default" @click="sendMessage">发送</van-button>
 
         </div>
 
@@ -27,7 +27,12 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 const fileList = ref([{url: 'https://fastly.jsdelivr.net/npm/@vant/assets/leaf.jpeg'}]);
-
+import { chatMessageApi } from "@/api/request";
+const sendMessage = ()=>{
+    chatMessageApi({
+        chatMessage:[{role:'user', content:"你好"}]
+    })
+}
 
 </script>
 
