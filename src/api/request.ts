@@ -20,8 +20,53 @@ const fetchApi = async(url:string, method:"POST" | "GET", body?:any, resType="se
         headers, 
         body:bodyData
     }
-    const response = await fetch(requestUrl, options)
+    const response = await fetch(url, options)
     console.log(response)
+    // 非流式输出
+    if (response.ok && resType != 'seream'){
+        const result: any = response.json 
+        return result 
+    }
+    // 流式输出
+    if (response.ok && resType == 'seream'){
+        const reader = response.body.getReader()
+        while (reader) {
+            const {done, value} = await reader.read()
+            if (done) break 
+            // 把字节流解码为utf-8的字符串
+            const decoder = new TextDecoder("utf-8")
+            // 解码二进制数据为字符串
+            const decodedString = decoder.decode(value)
+            if (decodedString !== "OK"){
+                // 在字符串中查询并提取所有成对的{}之间的内容
+                const matches = []
+                let depth = 0 
+                let start = 0
+                for (let i = 0; i < decodedString.length; i++) {
+                    if (decodedString[i] == "{"){
+                        if (depth === 0){
+                            start = i 
+                        }
+                        depth++
+                    }else if (decodedString[i] == "}"){
+                        depth--
+                        if (depth === 0){
+                            matches.push(decodedString.slice(start, i + 1))
+                        }
+                    }
+                }
+                console.log(matches)
+            }
+            if (decodedString == "OK"){
+                console.log("输出完毕")
+
+            }
+            console.log(decodedString);
+
+
+
+        }
+    }
 
 }
 
