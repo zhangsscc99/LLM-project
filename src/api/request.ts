@@ -55,20 +55,27 @@ const fetchApi = async(url:string, method:"POST" | "GET", body?:any, resType="se
                         }
                     }
                 }
-                console.log(matches)
+                // console.log(matches)
+                for (let index = 0; index < matches.length; index++) {
+                    var jsonString = matches[index]
+                    const res = JSON.parse(jsonString)
+                    console.log(res);
+                }
             }
             if (decodedString == "OK"){
                 console.log("输出完毕")
-
             }
             console.log(decodedString);
+            }
+            
+            
 
 
 
         }
-    }
-
 }
+
+
 
 // 统一返回的接口
 interface ApiResponse<T>{
