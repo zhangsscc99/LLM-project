@@ -27,11 +27,16 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 const fileList = ref([{url: 'https://fastly.jsdelivr.net/npm/@vant/assets/leaf.jpeg'}]);
-import { chatMessageApi } from "@/api/request";
-const sendMessage = ()=>{
-    chatMessageApi({
-        chatMessage:[{role:'user', content:"你好"}]
-    })
+// import { chatMessageApi } from "@/api/request";
+import { chatbotMessage} from "@/store/index";
+const store = chatbotMessage()
+
+const sendMessage = () => {
+    store.sendMessage('帮我查询昆明到大理的火车票')
+
+    // chatMessageApi({
+    //     chatMessage:[{role:'user', content:"查询昆明到大理的车票， 2024年11月24的"}]
+    // })
 }
 
 </script>
