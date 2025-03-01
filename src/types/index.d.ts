@@ -44,3 +44,15 @@ export type QueryTrainTicketsType = {
     departure:string, destination:string, date:string
 
 }
+
+// 查询火车票返回的参数
+export type ServerQueryTrainTicketsType = {
+    trainno:string
+    station:string
+    endstation:string
+    departuretime:string
+    arrivaltime:string
+    costtime:string
+    priceed:string
+
+}

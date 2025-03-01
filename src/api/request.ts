@@ -93,8 +93,8 @@ export const chatMessageApi = (data:{chatMessage:conversationType}):Promise<ApiR
     return fetchApi(`${requestUrl}/chatMessage`, "POST", data)
     }
 // 查询火车票
-export const queryTrainTickets = (data:QueryTrainTicketsType):Promise<ApiResponse<Buffer>>=>{
-    
+export const queryTrainTickets = (data:QueryTrainTicketsType):Promise<ApiResponse<ServerQueryTrainTicketsType>>=>{
+    return fetchApi(`${requestUrl}/queryTrainTickets`, "POST", data, "1234");
 }
 
 
