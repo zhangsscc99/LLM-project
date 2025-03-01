@@ -1,5 +1,6 @@
-import { chatMessageType, conversationType } from "@/types/index"
+import { chatMessageType, conversationType, QueryTrainTicketsType } from "@/types/index"
 const requestUrl = "http://127.0.0.1:7000"
+import { chatbotMessage } from "@/store/index"
 
 
 // fetch请求
@@ -60,6 +61,7 @@ const fetchApi = async(url:string, method:"POST" | "GET", body?:any, resType="se
                     var jsonString = matches[index]
                     const res = JSON.parse(jsonString)
                     console.log(res);
+                    chatbotMessage().serverData(res)
                 }
             }
             if (decodedString == "OK"){
@@ -90,6 +92,9 @@ export const chatMessageApi = (data:{chatMessage:conversationType}):Promise<ApiR
     {
     return fetchApi(`${requestUrl}/chatMessage`, "POST", data)
     }
-
+// 查询火车票
+export const queryTrainTickets = (data:QueryTrainTicketsType):Promise<ApiResponse<Buffer>>=>{
+    
+}
 
 

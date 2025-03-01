@@ -19,10 +19,28 @@ export type chatMessageType = {
     toolData?:any;//存储返回的函数调用工具数据
     type?:"function";//是单纯对话还是含有工具调用的数据
     functionName?:string;
-    progress?:boolean;//返回进度, false请求中, true数据已返回
+    progress?:boolean;//返回进度, false已返回, true数据请求中
     searchGoodsData?:ServerSearchGoodsType[];//搜索商品返回的结果
 
 
 
 };
-export type conversationType = chatMessageType[]
+export type conversationType = chatMessageType[];
+
+// 发送消息的字段
+export type sendMessageType = string | Array<TextContent | ImageContent>;
+
+// 大模型返回的消息
+export type serverDataType = {
+    type:string
+    functionName:string 
+    data:any
+};
+
+
+
+// 查询火车票传递的参数
+export type QueryTrainTicketsType = {
+    departure:string, destination:string, date:string
+
+}
