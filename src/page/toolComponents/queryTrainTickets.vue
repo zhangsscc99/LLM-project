@@ -22,6 +22,10 @@
 </template>
 
 <script setup lang="ts">
+import {}
+defineProps<{
+    functionData:
+}>
 
 </script>
 

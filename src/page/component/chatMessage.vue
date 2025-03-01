@@ -1,24 +1,25 @@
 <template>
-    <div class="chat-message">
+    <div class="chat-message" v-for="(item, index) in store.messages" :key="index">
         <div class="user-message">
-            <p>用户发送的文本</p>
+            <p v-if="Array.isArray(item.content)">{{ (item.content[0] as TextContent).text }}</p>
+            <p v-else>{{ item.content }}</p>
         </div>
-        <div class="send-image">
+        <div class="send-image" v-if="item.role === 'user' && Array.isArray(item.content)">
             <van-image
         width="120px"
         height="120px"
         radius="5"
         fit="cover"
-        src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"
+        src="(item.content[0] as ImageContent).image_url"
         />
         </div>
-        <div class="ai-message">
-            <!-- <div class="mark-text">大模型回复</div> -->
-             <!-- <div class="mark-text">
+        <div class="ai-message" v-if="item.role === 'assistant'">
+            <div class="mark-text" v-if="!item.progress">{{ item.content }}</div>
+             <div class="mark-text" v-if="item.progress">
                 <loadIng></loadIng>
-             </div> -->
+             </div>
         </div>
-        <queryTrainTickets></queryTrainTickets>
+        <queryTrainTickets v-if="item.role === 'assistant' && item.functionName === 'trainTickets'"></queryTrainTickets>
         <weather></weather>
         <searchGoods></searchGoods>
     </div>
@@ -31,6 +32,9 @@ import loadIng from '@/page/component/loadIng.vue'
 import queryTrainTickets from '@/page/toolComponents/queryTrainTickets.vue'
 import weather from "@/page/toolComponents/weather.vue"
 import searchGoods from "@/page/toolComponents/searchGoods.vue"
+import { chatbotMessage } from "@/store/index"
+const store = chatbotMessage()
+import { TextContent, ImageContent } from "@/types/index"
 </script>
 
 
