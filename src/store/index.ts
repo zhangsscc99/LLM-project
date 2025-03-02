@@ -28,9 +28,9 @@ export const chatbotMessage = defineStore('chatbotMessage', {
                 aiMessages['type'] = 'function'
                 // 查询火车票
                 if (res.functionName === "trainTickets"){
-                    const {departure, destination, date} = res.data
+                    const { departure, destination, date } = res.data
                     aiMessages.content = `正在为你查询${departure}到${destination}${date}出发的火车票`
-                    const queryRes = await queryTrainTickets({departure, destination, date})
+                    const queryRes = await queryTrainTickets({ departure, destination, date })
                     console.log(queryRes)
                     // 考虑没有查询到
                     if (queryRes.serviceCode == 200){
@@ -42,6 +42,11 @@ export const chatbotMessage = defineStore('chatbotMessage', {
                         aiMessages.content = queryRes.msg
                     }
                 }
+            }
+            // 沒有工具调用
+            if (res.type && res.type === "content"){
+                aiMessages.content += res.data;
+
             }
         }
     }

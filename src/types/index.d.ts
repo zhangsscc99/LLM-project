@@ -55,4 +55,4 @@ export type ServerQueryTrainTicketsType = {
     costtime:string
     priceed:string
 
-}
+}[];

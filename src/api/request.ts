@@ -1,4 +1,4 @@
-import { chatMessageType, conversationType, QueryTrainTicketsType } from "@/types/index"
+import { chatMessageType, conversationType, QueryTrainTicketsType, ServerQueryTrainTicketsType } from "@/types/index"
 const requestUrl = "http://127.0.0.1:7000"
 import { chatbotMessage } from "@/store/index"
 

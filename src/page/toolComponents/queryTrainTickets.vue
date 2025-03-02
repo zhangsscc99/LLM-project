@@ -1,64 +1,58 @@
 <template>
     <div style="height: 4px"></div>
-    <div class="result-item">
-        <div>
-            <p class="query-time">9:00</p>
-            <p class="station-name">昆明</p>
-        </div>
-        <div class="train-run-number">
-            <p>2小时30分</p>
-            <p>D7689</p>
-        </div>
-        <div>
-            <p class="query-time">10:00</p>
-            <p class="station-name">丽江</p>
-        </div>
-        <div>
-            <p class="product-price">￥123</p>
-            
-        </div>
+    <div class="result-item" v-for="(item, index) in functionData" :key="index">
+      <div>
+        <p class="query-time">{{ item.departuretime }}</p>
+        <p class="station-name">{{ item.station }}</p>
+      </div>
+      <div class="train-run-number">
+        <p>{{ item.costtime }}</p>
+        <p>{{ item.trainno }}</p>
+      </div>
+      <div>
+        <p class="query-time">{{ item.arrivaltime }}</p>
+        <p class="station-name">{{ item.endstation }}</p>
+      </div>
+      <div>
+        <p class="product-price">¥{{ item.priceed }}</p>
+      </div>
     </div>
-
-</template>
-
-<script setup lang="ts">
-import {}
-defineProps<{
-    functionData:
-}>
-
-</script>
-
-<style scoped lang="less">
-.result-item{
+  </template>
+  
+  <script setup lang="ts">
+  import { ServerQueryTrainTicketsType } from "@/types/index";
+  defineProps<{
+    functionData: ServerQueryTrainTicketsType;
+  }>();
+  </script>
+  
+  <style scoped lang="less">
+  .result-item {
     background-color: #ffffff;
     display: flex;
     align-items: center;
     justify-content: space-around;
     padding: 7px 0;
     border-top: 1px solid #f6f8fa;
-    .query-time{
-        font-weight: bold;
-        font-size: 17px;
-
+    .query-time {
+      font-weight: bold;
+      font-size: 17px;
     }
-    .station-name{
-        font-weight: bold;
-        font-size: 14px;
+    .station-name {
+      font-weight: bold;
+      font-size: 14px;
     }
-    .train-run-number{
-        p{
-            font-size: 13px;
-            color: #666697;
-
-        }
+    .train-run-number {
+      p {
+        font-size: 13px;
+        color: #666697;
+      }
     }
-    .product-price{
-        font-size: 17px;
-        font-weight: bold;
-        color: #006ff6;
+    .product-price {
+      font-size: 17px;
+      font-weight: bold;
+      color: #006ff6;
     }
-}
-</style>
-
-
+  }
+  </style>
+  

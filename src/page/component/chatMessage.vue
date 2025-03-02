@@ -1,27 +1,22 @@
 <template>
     <div class="chat-message" v-for="(item, index) in store.messages" :key="index">
-        <div class="user-message">
+        <div class="user-message" v-if="item.role === 'user'">
             <p v-if="Array.isArray(item.content)">{{ (item.content[0] as TextContent).text }}</p>
             <p v-else>{{ item.content }}</p>
         </div>
         <div class="send-image" v-if="item.role === 'user' && Array.isArray(item.content)">
-            <van-image
-        width="120px"
-        height="120px"
-        radius="5"
-        fit="cover"
-        src="(item.content[0] as ImageContent).image_url"
-        />
+            <van-image width="120px" height="120px" radius="5" fit="cover" :src="(item.content[1] as ImageContent).image_url.url"/>
         </div>
-        <div class="ai-message" v-if="item.role === 'assistant'">
+        <div class="ai-message" v-if="item.role == 'assistant'">
             <div class="mark-text" v-if="!item.progress">{{ item.content }}</div>
              <div class="mark-text" v-if="item.progress">
                 <loadIng></loadIng>
              </div>
         </div>
-        <queryTrainTickets v-if="item.role === 'assistant' && item.functionName === 'trainTickets'"></queryTrainTickets>
-        <weather></weather>
-        <searchGoods></searchGoods>
+        <queryTrainTickets v-if="item.role == 'assistant' && item.functionName == 'trainTickets'"
+        :function-data="item.toolData"></queryTrainTickets>
+        <!-- <weather></weather>
+        <searchGoods></searchGoods> -->
     </div>
 </template>
 
