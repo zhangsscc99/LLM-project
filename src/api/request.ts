@@ -98,6 +98,6 @@ export const queryTrainTickets = (data:QueryTrainTicketsType):Promise<ApiRespons
 }
 // 查询天气
 export const queryWeather = (data:QueryWeatherType):Promise<ApiResponse<ServerQueryWeatherType>>=>{
-    return fetchApi(`${requestUrl}/queryWeather?city=${data}`, "GET", '1234', "1234");
+    return fetchApi(`${requestUrl}/queryWeather?city=${data.city}`, "GET", "", '1234', "1234");
 }
 

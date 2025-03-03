@@ -1,27 +1,15 @@
 <template>
     <div style="height: 4px"></div>
     <div class="weather-content">
-        <div class="weather-item">
-            <div class="day-time">11/09</div>
+        <div class="weather-item" v-for="(item, index) in functionData" :key="index">
+            <div class="day-time">{{  item.daytime.slice(4).slice(0,2) }}/{{  item.daytime.slice(4).slice(2) }}</div>
             <div class="day-weather">
-                <img src="@/assets/kefu.png" alt="">
-                <p>晴</p>
-
+                <img :src="item.day_weather_pic" alt="" />
+                <p>{{  item.day_weather }}</p>
             </div>
-            <div class="temperature">12-18℃</div>
+            <div class="temperature">{{  item.day_air_temperature }}~{{  item.night_air_temperature }}℃</div>
         </div>
-        <div class="weather-item">
-            <div class="day-time">11/09</div>
-            <div class="day-weather">
-                <img src="@/assets/kefu.png" alt="">
-                <p>多云</p>
-
-            </div>
-            <div class="temperature">12-18℃</div>
-        </div>
-
     </div>
-
 </template>
 
 <script setup lang="ts">

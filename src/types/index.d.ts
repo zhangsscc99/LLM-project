@@ -67,6 +67,6 @@ export type ServerQueryWeatherType = {
     day_weather_pic: string;
     night_air_temperature: string;
     day_air_temperature: string;
-}
+}[];
     
 

@@ -46,7 +46,8 @@ export const chatbotMessage = defineStore('chatbotMessage', {
                 if (res.functionName === "getWeather"){
                     const { city } = res.data
                     aiMessages.content = `正在为你查询${city}的天气情况`;
-                    const queryRes = await queryWeather(city)
+                    const queryRes = await queryWeather({ city });
+                    console.log(queryRes);
                     // 考虑没有查询到
                     if (queryRes.serviceCode == 200){
                         aiMessages.content = `以下是为你查询到的${city}的天气情况`
