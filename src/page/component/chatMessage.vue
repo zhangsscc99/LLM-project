@@ -15,8 +15,8 @@
         </div>
         <queryTrainTickets v-if="item.role == 'assistant' && item.functionName == 'trainTickets'"
         :function-data="item.toolData"></queryTrainTickets>
-        <!-- <weather></weather>
-        <searchGoods></searchGoods> -->
+        <weather v-if="item.role == 'assistant' && item.functionName == 'getWeather'" :function-data="item.toolData"></weather>
+       <searchGoods></searchGoods> 
     </div>
 </template>
 

@@ -56,3 +56,17 @@ export type ServerQueryTrainTicketsType = {
     priceed:string
 
 }[];
+// 查询天气传递的参数
+export type QueryWeatherType = {
+    city:string
+}
+// 查询天气返回的结果
+export type ServerQueryWeatherType = {
+    daytime: string;
+    day_weather: string;    
+    day_weather_pic: string;
+    night_air_temperature: string;
+    day_air_temperature: string;
+}
+    
+

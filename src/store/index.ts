@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { conversationType, sendMessageType, serverDataType } from "@/types/index";
-import { chatMessageApi, queryTrainTickets } from "@/api/request";
+import { chatMessageApi, queryTrainTickets, queryWeather } from "@/api/request";
 
 export const chatbotMessage = defineStore('chatbotMessage', {
     state:()=>({
@@ -41,6 +41,22 @@ export const chatbotMessage = defineStore('chatbotMessage', {
                     }else{
                         aiMessages.content = queryRes.msg
                     }
+                }
+                // 查询天气
+                if (res.functionName === "getWeather"){
+                    const { city } = res.data
+                    aiMessages.content = `正在为你查询${city}的天气情况`;
+                    const queryRes = await queryWeather(city)
+                    // 考虑没有查询到
+                    if (queryRes.serviceCode == 200){
+                        aiMessages.content = `以下是为你查询到的${city}的天气情况`
+                        aiMessages["toolData"] = queryRes.data
+                        aiMessages["functionName"] = "getWeather"
+
+                    }else{
+                        aiMessages.content = queryRes.msg
+                    }
+                    // console.log(queryRes)
                 }
             }
             // 沒有工具调用

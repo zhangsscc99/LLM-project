@@ -25,7 +25,10 @@
 </template>
 
 <script setup lang="ts">
-
+import { ServerQueryWeatherType } from "@/types/index";
+defineProps<{
+    functionData: ServerQueryWeatherType;
+}>();
 </script>
 
 <style scoped lang="less">

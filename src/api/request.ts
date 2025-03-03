@@ -1,4 +1,4 @@
-import { chatMessageType, conversationType, QueryTrainTicketsType, ServerQueryTrainTicketsType } from "@/types/index"
+import { chatMessageType, conversationType, QueryTrainTicketsType, ServerQueryTrainTicketsType, QueryWeatherType, ServerQueryWeatherType } from "@/types/index"
 const requestUrl = "http://127.0.0.1:7000"
 import { chatbotMessage } from "@/store/index"
 
@@ -96,5 +96,8 @@ export const chatMessageApi = (data:{chatMessage:conversationType}):Promise<ApiR
 export const queryTrainTickets = (data:QueryTrainTicketsType):Promise<ApiResponse<ServerQueryTrainTicketsType>>=>{
     return fetchApi(`${requestUrl}/queryTrainTickets`, "POST", data, "1234");
 }
-
+// 查询天气
+export const queryWeather = (data:QueryWeatherType):Promise<ApiResponse<ServerQueryWeatherType>>=>{
+    return fetchApi(`${requestUrl}/queryWeather?city=${data}`, "GET", '1234', "1234");
+}
 
