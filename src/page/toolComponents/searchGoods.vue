@@ -2,10 +2,12 @@
     <div class="goods-content">
         <p class="title">为你推荐以下相关的旅行套餐，官方严选：</p>
         <div class="goods-list">
-            <div class="goods-item">
-                <img src="https://global.unitednations.entermediadb.net/assets/mediadb/services/module/asset/downloads/preset/Libraries/Production+Library/willian-justen-de-vasconcellos-4hMET7vYTAQ-unsplash.jpg/image1170x530cropped.jpg" alt="">
-                <p class="goods-title text-show">商品标题</p>
-                <p class="goods-price">￥123</p>
+            <div class="goods-item" v-for="(item, index) in SearchGoodsData" :key="index"
+            @click="goToUrl(item._id)"
+            >
+                <img :src="item.coverImage" alt="" />
+                <p class="goods-title text-show">{{ item.contentTitle}}</p>
+                <p class="goods-price">￥{{  item.price }}</p>
             </div>
 
             <div class="goods-item">
@@ -24,6 +26,15 @@
 </template>
 
 <script setup lang="ts">
+import { ServerSearchGoodsType } from "@/types/index";
+import { useRouter } from "vue-router";
+const $router = useRouter();
+defineProps<{
+    SearchGoodsData : ServerSearchGoodsType
+}>();
+const goToUrl = (id: string) => {
+    $router.push({path:'/goodsDetails', query:{ id }});
+}
 </script>
 
 <style scoped lang="less">

@@ -16,7 +16,7 @@
         <queryTrainTickets v-if="item.role == 'assistant' && item.functionName == 'trainTickets'"
         :function-data="item.toolData"></queryTrainTickets>
         <weather v-if="item.role == 'assistant' && item.functionName == 'getWeather'" :function-data="item.toolData"></weather>
-       <searchGoods></searchGoods> 
+       <searchGoods v-if="item.role == 'assistant' && item.searchGoodsData && item.searchGoodsData.length > 0" :-search-goods-data="item.searchGoodsData"></searchGoods> 
     </div>
 </template>
 

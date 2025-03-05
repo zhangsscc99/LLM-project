@@ -1,19 +1,37 @@
 import { defineStore } from "pinia";
-import { conversationType, sendMessageType, serverDataType } from "@/types/index";
-import { chatMessageApi, queryTrainTickets, queryWeather } from "@/api/request";
+import { conversationType, sendMessageType, serverDataType, TextContent, ServerSearchGoodsType } from "@/types/index";
+import { chatMessageApi, queryTrainTickets, queryWeather, searchGoods } from "@/api/request";
 
 export const chatbotMessage = defineStore('chatbotMessage', {
     state:()=>({
-        messages:[] as conversationType // 存储聊天记录
+        messages:[] as conversationType, // 存储聊天记录
+        searchGoodsData:[] as ServerSearchGoodsType[] // 临时存储商品数据
     }),
     actions:{
         // 发送消息
         async sendMessage(content:sendMessageType){
             this.messages.push({role:'user', content})
             this.messages.push({role:'assistant', content:'', progress:true})
-            // 请求服务器端
+            // 搜索商品
+            let userMessages = '' 
+            const userMessagesType = this.messages[this.messages - 2].content 
+            if (typeof userMessagesType === 'string'){
+                userMessages = userMessagesType
+            }else{
+                userMessages = (userMessagesType[0] as TextContent).text
+            }
+            searchGoods({userMessages}).then(res=>{
+                console.log('搜索商品');
+                console.log(res);
+                this.searchGoodsData = res.data;
+
+            })
+            // 请求服务器端，大模型对话
             await chatMessageApi({chatMessage:this.messages})
             console.log('对话完毕了');
+            // 等到对话完毕再来赋值商品数据
+            this.messages[this.messages.length - 1]["searchGoodsData"] = this.searchGoodsData;
+            
 
 
 

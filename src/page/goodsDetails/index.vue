@@ -1,23 +1,43 @@
 <template>
-    <van-nav-bar title="商品详情" left-arrow fixed placeholder/>
-    <img class="cover-image" src="https://cn.matsuyama-sightseeing.com/wp-content/themes/MatsuyamaSightseeing_theme_2019_cn/assets/img/home/kvsp_05.jpg" alt="">
+    <van-nav-bar title="商品详情" left-arrow fixed placeholder @click-left="onClickLeft"/>
+<div v-for="(item, index) in goodsDetailsData" :key="index">
+    <img class="cover-image" src="item.coverImage" alt="">
     <div class="price-and-title">
-        <p class="goods-price">199/人</p>
-        <p class="goods-title">标题</p>
+        <p class="goods-price">{{ item.price }}/人</p>
+        <p class="goods-title">{{  item.contentTitle }}</p>
     </div>
     <div class="goods-details">
         <p class="goods-describe">产品特色</p>
-        <img src="https://www.aichi-now.jp/img/sp/top/mv_ph006.jpg" alt="">
-        <img src="https://www.aichi-now.jp/img/sp/top/mv_ph006.jpg" alt="">
-        <img src="https://www.aichi-now.jp/img/sp/top/mv_ph006.jpg" alt="">
+        <img v-for = "(item_a, index_a) in item.productImages" :key="index_a" :src="item_a" alt="" />
     </div>
     <div class="submit">
         <van-button type="primary" block>立即报名</van-button>
     </div>
+</div>
     <div style="height: 100px"></div>
 </template>
 
 <script setup lang="ts">
+import { useRoute } from "vue-router";
+const $router = useRoute();
+import { onMounted, ref } from "vue";
+import { goodsDetails } from "@/api/request";
+import { ServerGoodsDetails } from "@/types/index";
+// 存储商品详情数据
+const goodsDetailsData = ref<ServerGoodsDetails>([]);
+onMounted(async()=>{
+    const goodsId = $router.query.id as string;
+    const res = await goodsDetails({goodsId});
+    console.log(res);
+    goodsDetailsData.value = res.data;
+
+}
+)
+const onClickLeft = () => history.back();
+
+
+
+
 </script>
 <style scoped lang="less">
 .cover-image{

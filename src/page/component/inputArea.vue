@@ -32,7 +32,7 @@ import { chatbotMessage} from "@/store/index";
 const store = chatbotMessage()
 
 const sendMessage = () => {
-    store.sendMessage("看看昆明的天气吧")
+    store.sendMessage("昆明好玩吗")
 
     // chatMessageApi({
     //     chatMessage:[{role:'user', content:"查询昆明到大理的车票， 2024年11月24的"}]

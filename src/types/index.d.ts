@@ -4,11 +4,11 @@ export type ImageContent = {type:'image_url', image_url:{url:string}}
 
 // 搜索商品返回的结果
 export type ServerSearchGoodsType = {
-    _id:string;
-    coverImage:string;
-    contentTitle:string;
-    price:number
-}[]
+    _id: string;
+    coverImage: string;
+    contentTitle: string;
+    price: number;
+}[];
 
 
 
@@ -41,24 +41,25 @@ export type serverDataType = {
 
 // 查询火车票传递的参数
 export type QueryTrainTicketsType = {
-    departure:string, destination:string, date:string
-
+    departure:string; 
+    destination:string; 
+    date:string;
 }
 
 // 查询火车票返回的参数
 export type ServerQueryTrainTicketsType = {
-    trainno:string
-    station:string
-    endstation:string
-    departuretime:string
-    arrivaltime:string
-    costtime:string
-    priceed:string
+    trainno:string;
+    station:string;
+    endstation:string;
+    departuretime:string;
+    arrivaltime:string;
+    costtime:string;
+    priceed:string;
 
 }[];
 // 查询天气传递的参数
 export type QueryWeatherType = {
-    city:string
+    city:string;
 }
 // 查询天气返回的结果
 export type ServerQueryWeatherType = {
@@ -68,5 +69,17 @@ export type ServerQueryWeatherType = {
     night_air_temperature: string;
     day_air_temperature: string;
 }[];
+
+// 搜索商品传递参数
+export type SearchGoodsType = {
+    userMessages: string;
+};
+// 商品详情
+type ServerGoodsDetailsItem = {
+    productImages:string[];
+} & ServerSearchGoodsType[number]
+export type ServerGoodsDetails = ServerGoodsDetailsItem[];
+
+
     
 
