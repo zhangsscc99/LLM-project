@@ -2,7 +2,7 @@
     <div class="goods-content">
         <p class="title">为你推荐以下相关的旅行套餐，官方严选：</p>
         <div class="goods-list">
-            <div class="goods-item" v-for="(item, index) in SearchGoodsData" :key="index"
+            <div class="goods-item" v-for="(item, index) in searchGoodsData" :key="index"
             @click="goToUrl(item._id)"
             >
                 <img :src="item.coverImage" alt="" />
@@ -30,7 +30,7 @@ import { ServerSearchGoodsType } from "@/types/index";
 import { useRouter } from "vue-router";
 const $router = useRouter();
 defineProps<{
-    SearchGoodsData : ServerSearchGoodsType
+    searchGoodsData: ServerSearchGoodsType
 }>();
 const goToUrl = (id: string) => {
     $router.push({path:'/goodsDetails', query:{ id }});

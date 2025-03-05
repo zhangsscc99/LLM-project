@@ -1,5 +1,6 @@
 {
   "compilerOptions":{
+    "strict":true, // 严格类型校验
     // 告诉ts找文件从哪里找
     "baseUrl":"./",
     // 定义路径的映射

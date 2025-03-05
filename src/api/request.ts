@@ -40,7 +40,7 @@ const fetchApi = async(url:string, method:"POST" | "GET", body?:any, resType="se
     }
     // 流式输出
     if (response.ok && resType == 'seream'){
-        const reader = response.body.getReader()
+        const reader = response.body?.getReader()
         while (reader) {
             const {done, value} = await reader.read()
             if (done) break 
@@ -94,8 +94,8 @@ interface ApiResponse<T>{
     data:T, //返给前端的数据
     msg:string, //提示
     error:any, //错误说明
-    serviceCode, //业务错误码
-    code //状态码
+    serviceCode:string, //业务错误码
+    code:string //状态码
 }
 // 发送消息
 export const chatMessageApi = (data:{chatMessage:conversationType}):Promise<ApiResponse<Buffer>>=>

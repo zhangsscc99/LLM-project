@@ -12,9 +12,10 @@ export const chatbotMessage = defineStore('chatbotMessage', {
         async sendMessage(content:sendMessageType){
             this.messages.push({role:'user', content})
             this.messages.push({role:'assistant', content:'', progress:true})
+            
             // 搜索商品
             let userMessages = '' 
-            const userMessagesType = this.messages[this.messages - 2].content 
+            const userMessagesType = this.messages[this.messages.length - 2].content 
             if (typeof userMessagesType === 'string'){
                 userMessages = userMessagesType
             }else{
