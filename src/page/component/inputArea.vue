@@ -4,7 +4,7 @@
         <div class="data-query">
             <van-button size="small" type="default">查询火车票</van-button>
             <van-button size="small" type="default">查询天气</van-button>
-            <van-uploader>
+            <van-uploader :before-read="beforeRead">
                 <van-button size="small" type="default">图片问答</van-button>
             </van-uploader>
             <van-uploader>
@@ -29,6 +29,8 @@ import { ref } from 'vue';
 const fileList = ref([{url: 'https://fastly.jsdelivr.net/npm/@vant/assets/leaf.jpeg'}]);
 // import { chatMessageApi } from "@/api/request";
 import { chatbotMessage} from "@/store/index";
+import { showToast } from "vant";
+import type { UploaderBeforeRead } from "vant";
 const store = chatbotMessage()
 
 const sendMessage = () => {
@@ -38,7 +40,16 @@ const sendMessage = () => {
     //     chatMessage:[{role:'user', content:"查询昆明到大理的车票， 2024年11月24的"}]
     // })
 }
-
+// 上传之前校验
+const beforeRead:UploaderBeforeRead = (file) => {
+    console.log(file);
+    const imageType = ["image/jpeg", "image/jpg", "image/png", "image/webp"]
+    if (!imageType.includes(file.type)) {
+        showToast("请上传正确的图片");
+        return false;
+    }
+    return true;
+}
 </script>
 
 <style scoped lang="less">
