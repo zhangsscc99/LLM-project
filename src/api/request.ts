@@ -119,3 +119,7 @@ export const searchGoods = (data: SearchGoodsType): Promise<ApiResponse<ServerSe
 export const goodsDetails = (data: {goodsId:string}):Promise<ApiResponse<ServerGoodsDetails>>=>{
     return fetchApi(`${requestUrl}/goodsDetails`, "POST", data, "1234");
 }
+// 图片上传
+export const uploadFile = (data: FormData):Promise<ApiResponse<string>>=>{
+    return fetchApi(`${requestUrl}/uploadFile`, "POST", data, "1234", "1234");
+}

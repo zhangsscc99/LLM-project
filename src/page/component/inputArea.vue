@@ -1,10 +1,12 @@
 <template>
     <div class="input-container">
-        <!-- <van-uploader v-model="fileList" :max-count="1" preview-size="60" disabled /> -->
-        <div class="data-query">
+        <van-uploader v-model="fileList" :max-count="1" preview-size="60" disabled v-if="!showImage"
+        :before-delete="beforeDelete"
+        />
+        <div class="data-query" v-if="showImage">
             <van-button size="small" type="default">查询火车票</van-button>
             <van-button size="small" type="default">查询天气</van-button>
-            <van-uploader :before-read="beforeRead">
+            <van-uploader :before-read="beforeRead" :after_read="afterRead">
                 <van-button size="small" type="default">图片问答</van-button>
             </van-uploader>
             <van-uploader>
@@ -26,22 +28,20 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-const fileList = ref([{url: 'https://fastly.jsdelivr.net/npm/@vant/assets/leaf.jpeg'}]);
 // import { chatMessageApi } from "@/api/request";
 import { chatbotMessage} from "@/store/index";
-import { showToast } from "vant";
-import type { UploaderBeforeRead } from "vant";
+import { showToast, showLoadingToast } from "vant";
+import type { UploaderBeforeRead, UploaderAfterRead } from "vant";
 const store = chatbotMessage()
+import { uploadFile } from "@/api/request"
 
-const sendMessage = () => {
-    store.sendMessage("昆明好玩吗")
 
-    // chatMessageApi({
-    //     chatMessage:[{role:'user', content:"查询昆明到大理的车票， 2024年11月24的"}]
-    // })
-}
+// 存储上传的图片
+const fileList = ref([{url: ''}]);
+// 是否已上传图片
+const showImage = ref(true)
 // 上传之前校验
-const beforeRead:UploaderBeforeRead = (file) => {
+const beforeRead:UploaderBeforeRead = (file:any) => {
     console.log(file);
     const imageType = ["image/jpeg", "image/jpg", "image/png", "image/webp"]
     if (!imageType.includes(file.type)) {
@@ -49,7 +49,47 @@ const beforeRead:UploaderBeforeRead = (file) => {
         return false;
     }
     return true;
-}
+};
+// 上传成功
+const afterRead:UploaderAfterRead = async(file:any)=>{
+    const toast = showLoadingToast({
+        message:"上传中...",
+        forbidClick:true,
+        duration:0
+    })
+    console.log(file.file);
+    const formData = new FormData();
+    formData.append("file", file.file);
+    const res = await uploadFile(formData);
+    console.log(res);
+    fileList.value[0].url = res.data;
+    showImage.value = false;
+    toast.close();
+};
+// 删除图片
+const beforeDelete = (file:any)=>{
+    fileList.value[0].url = '';
+    showImage.value = true;
+};
+// 输入框内容
+const inputContent = ref('');
+const sendMessage = () => {
+    store.sendMessage(
+        showImage.value ? inputContent.value : [
+            {
+                type:"text",text:inputContent.value
+
+            },
+            {
+                type:"image_url",image_url:{url:fileList.value[0].url}
+            }
+        ]
+    )
+    
+
+  
+};
+
 </script>
 
 <style scoped lang="less">
