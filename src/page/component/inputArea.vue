@@ -4,20 +4,20 @@
         :before-delete="beforeDelete"
         />
         <div class="data-query" v-if="showImage">
-            <van-button size="small" type="default">查询火车票</van-button>
-            <van-button size="small" type="default">查询天气</van-button>
-            <van-uploader :before-read="beforeRead" :after_read="afterRead">
+            <van-button size="small" type="default" :disabled="store.prohibit" @click="inquire('我查询火车票')">查询火车票</van-button>
+            <van-button size="small" type="default" :disabled="store.prohibit" @click="inquire('帮我查询天气')">查询天气</van-button>
+            <van-uploader :before-read="beforeRead" :after_read="afterRead" :disabled="store.prohibit">
                 <van-button size="small" type="default">图片问答</van-button>
             </van-uploader>
             <van-uploader>
-                <van-button size="small" type="default">一键投诉</van-button>
+                <van-button size="small" type="default" :disabled="store.prohibit">一键投诉</van-button>
             </van-uploader>
 
         </div>
         <div class="input-box-area">
-            <img src="@/assets/qingchu.png" alt="">
+            <img src="@/assets/qingchu.png" alt="" @click="remove">
             <van-field class="input-content" type="textarea" placeholder="请输入询问内容" :border="false"></van-field>
-            <van-button class="send-button" size="small" type="default" @click="sendMessage">发送</van-button>
+            <van-button class="send-button" size="small" type="default" @click="sendMessage" :disabled="store.prohibit">发送</van-button>
 
         </div>
 
@@ -67,13 +67,14 @@ const afterRead:UploaderAfterRead = async(file:any)=>{
     toast.close();
 };
 // 删除图片
-const beforeDelete = (file:any)=>{
+const beforeDelete = ()=>{
     fileList.value[0].url = '';
     showImage.value = true;
 };
 // 输入框内容
 const inputContent = ref('');
 const sendMessage = () => {
+    if (inputContent.value.trim() === "") return;
     store.sendMessage(
         showImage.value ? inputContent.value : [
             {
@@ -85,10 +86,20 @@ const sendMessage = () => {
             }
         ]
     )
-    
-
-  
+    beforeDelete()
+    inputContent.value = "";
 };
+const inquire = (val:string)=>{
+    inputContent.value = val;
+    sendMessage();
+
+
+};
+// 清空
+const remove = ()=>{
+    if (store.prohibit) return;
+    store.messages = []
+}
 
 </script>
 
@@ -111,6 +122,7 @@ const sendMessage = () => {
         .van-button{
             margin-left: 15px;
             margin-bottom: 15px;
+            opacity: 1;
         }
 
     }

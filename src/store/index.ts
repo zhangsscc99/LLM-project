@@ -5,7 +5,8 @@ import { chatMessageApi, queryTrainTickets, queryWeather, searchGoods } from "@/
 export const chatbotMessage = defineStore('chatbotMessage', {
     state:()=>({
         messages:[] as conversationType, // 存储聊天记录
-        searchGoodsData:[] as ServerSearchGoodsType[] // 临时存储商品数据
+        searchGoodsData:[] as ServerSearchGoodsType, // 临时存储商品数据
+        prohibit:false,//对话进行中， 禁用其他按钮
     }),
     actions:{
         // 发送消息
@@ -32,6 +33,7 @@ export const chatbotMessage = defineStore('chatbotMessage', {
             console.log('对话完毕了');
             // 等到对话完毕再来赋值商品数据
             this.messages[this.messages.length - 1]["searchGoodsData"] = this.searchGoodsData;
+            this.prohibit = false//放开按钮点击
             
 
 
