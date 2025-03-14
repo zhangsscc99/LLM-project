@@ -8,7 +8,7 @@
             <van-image width="120px" height="120px" radius="5" fit="cover" :src="(item.content[1] as ImageContent).image_url.url"/>
         </div>
         <div class="ai-message" v-if="item.role == 'assistant'">
-            <div class="mark-text" v-if="!item.progress">{{ item.content }}</div>
+            <div class="mark-text" v-if="!item.progress" v-html="marked(item.content as string)"></div>
              <div class="mark-text" v-if="item.progress">
                 <loadIng></loadIng>
              </div>
@@ -30,6 +30,7 @@ import searchGoods from "@/page/toolComponents/searchGoods.vue"
 import { chatbotMessage } from "@/store/index"
 const store = chatbotMessage()
 import { TextContent, ImageContent } from "@/types/index"
+import { marked} from "marked";
 </script>
 
 
