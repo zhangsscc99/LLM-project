@@ -7,12 +7,16 @@ export const chatbotMessage = defineStore('chatbotMessage', {
         messages:[] as conversationType, // 存储聊天记录
         searchGoodsData:[] as ServerSearchGoodsType, // 临时存储商品数据
         prohibit:false,//对话进行中， 禁用其他按钮
+        userScrolled:false//如果用户下拉页面，就不在自动滚动
+
     }),
     actions:{
         // 发送消息
         async sendMessage(content:sendMessageType){
             this.messages.push({role:'user', content})
             this.messages.push({role:'assistant', content:'', progress:true})
+            this.prohibit = true; // 禁用其他按钮点击
+            this.userScrolled = false; // 用户下拉页面，就不在自动滚动
             
             // 搜索商品
             let userMessages = '' 
