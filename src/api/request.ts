@@ -39,6 +39,35 @@ const fetchApi = async(url:string, method:"POST" | "GET", body?:any, resType="se
         const result: any = response.json 
         return result 
     }
+    // 请求失败的错误
+    if (!response.ok) {
+        const errorData = await response.json();
+        const status = response.status;
+        switch (status) {
+        case 404:
+            console.error("404错误");
+            break;
+        case 500:
+        case 501:
+        case 502:
+            console.error("发生异常错误");
+            showToast({ message: "出现异常错误罗", duration: 1000 });
+            break;
+        case 400:
+            console.error("参数不对");
+            break;
+        case 422:
+            console.error("参数不对");
+            showToast({ message: errorData.msg, duration: 1000 });
+            break;
+        }
+        // 如果出现错误，用户依然可以点击按钮
+        chatbotMessage().prohibit = false;
+        if (chatbotMessage().messages.length > 0) {
+        chatbotMessage().messages[chatbotMessage().messages.length - 1].progress = false;
+        }
+        throw errorData;
+    }
     // 流式输出
     if (response.ok && resType == 'seream'){
         const reader = response.body?.getReader()
