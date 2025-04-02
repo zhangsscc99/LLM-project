@@ -79,7 +79,16 @@ type ServerGoodsDetailsItem = {
     productImages:string[];
 } & ServerSearchGoodsType[number]
 export type ServerGoodsDetails = ServerGoodsDetailsItem[];
-
+// 提交投诉传递参数
+export type AddComplaintType = {
+    complaintTarget:string;
+    complaintReason:string;
+    location:string;
+    appeal:string;
+    userName:string;
+    phoneNumber:string;
+    travelMethod:string;
+}
 
     
 

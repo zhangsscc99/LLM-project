@@ -7,7 +7,8 @@ import {
     ServerQueryWeatherType, 
     SearchGoodsType, 
     ServerSearchGoodsType,
-    ServerGoodsDetails
+    ServerGoodsDetails,
+    ComplaintType
 } from "@/types/index"
 const requestUrl = "http://127.0.0.1:7000"
 import { chatbotMessage } from "@/store/index"
@@ -122,4 +123,9 @@ export const goodsDetails = (data: {goodsId:string}):Promise<ApiResponse<ServerG
 // 图片上传
 export const uploadFile = (data: FormData):Promise<ApiResponse<string>>=>{
     return fetchApi(`${requestUrl}/uploadFile`, "POST", data, "1234", "1234");
+}
+
+// 提交投诉
+export const addComplaint = (data: ComplaintType): Promise<ApiResponse<null>> => {
+    return fetchApi(`${requestUrl}/addComplaint`, "POST", data, "1234", "1234");
 }
