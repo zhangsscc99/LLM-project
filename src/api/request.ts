@@ -8,11 +8,12 @@ import {
     SearchGoodsType, 
     ServerSearchGoodsType,
     ServerGoodsDetails,
-    ComplaintType
+    AddComplaintType,
+    
 } from "@/types/index"
 const requestUrl = "http://127.0.0.1:7000"
 import { chatbotMessage } from "@/store/index"
-
+import { showToast, showLoadingToast } from "vant";
 
 // fetch请求
 const fetchApi = async(url:string, method:"POST" | "GET", body?:any, resType="seream", reqType="json")=>{
@@ -44,22 +45,22 @@ const fetchApi = async(url:string, method:"POST" | "GET", body?:any, resType="se
         const errorData = await response.json();
         const status = response.status;
         switch (status) {
-        case 404:
-            console.error("404错误");
-            break;
-        case 500:
-        case 501:
-        case 502:
-            console.error("发生异常错误");
-            showToast({ message: "出现异常错误罗", duration: 1000 });
-            break;
-        case 400:
-            console.error("参数不对");
-            break;
-        case 422:
-            console.error("参数不对");
-            showToast({ message: errorData.msg, duration: 1000 });
-            break;
+            case 404:
+                console.error("404错误");
+                break;
+            case 500:
+            case 501:
+            case 502:
+                console.error("发生异常错误");
+                showToast({ message: "出现异常错误罗", duration: 1000 });
+                break;
+            case 400:
+                console.error("参数不对");
+                break;
+            case 422:
+                console.error("参数不对");
+                showToast({ message: errorData.msg, duration: 1000 });
+                break;
         }
         // 如果出现错误，用户依然可以点击按钮
         chatbotMessage().prohibit = false;
@@ -155,6 +156,6 @@ export const uploadFile = (data: FormData):Promise<ApiResponse<string>>=>{
 }
 
 // 提交投诉
-export const addComplaint = (data: ComplaintType): Promise<ApiResponse<null>> => {
+export const addComplaint = (data: AddComplaintType): Promise<ApiResponse<null>> => {
     return fetchApi(`${requestUrl}/addComplaint`, "POST", data, "1234", "1234");
 }
